@@ -154,6 +154,18 @@ test_data = [
         a = 0.5, b = 1,
         epsilon=0.0001
     ),
+    Example(
+        name = "Билет 6",
+        func=lambda x: x**4 - 18 * x**3 - 10,
+        a = -1, b = 0,
+        epsilon=0.0001
+    ),
+    Example(
+        name = "Билет 17",
+        func=lambda x: x**4 - 18 * x - 10,
+        a = -1, b = 0,
+        epsilon=0.0001
+    ),
 ]
 
 for index, test in enumerate(test_data):
