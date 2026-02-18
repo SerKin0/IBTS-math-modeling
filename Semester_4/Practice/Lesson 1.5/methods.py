@@ -131,13 +131,10 @@ def method_newton(func: Callable[[float], float], a: float, b: float, x0: float 
             raise 
         
         if (abs(fx) < epsilon):
-            return x0
+            return x
         
         x0 = x
         
     # В случае, если пересечение не было найдено за отведенное количество итераций, то
     # выдаем соответствующую ошибку 
     raise InterruptedError(f"Нахождение корня превысило количество допустимых итераций ({max_iteration=})")
-        
-        
-print(method_newton(func=lambda x: x ** 2 - 2 * x - 3, a=1, b=5))
