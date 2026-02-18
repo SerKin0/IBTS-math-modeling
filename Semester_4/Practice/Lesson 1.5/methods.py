@@ -102,3 +102,42 @@ def method_chord(func: Callable[[float], float], a: float, b: float,
     # выдаем соответствующую ошибку 
     raise InterruptedError(f"Нахождение корня превысило количество допустимых итераций ({max_iteration=})")
     
+    
+def tangent(func: Callable[[float], float], x0: float, epsilon: float = 10e-6) -> tuple[float, float]:
+    k = (func(x0 + epsilon) - func(x0)) / epsilon
+    b = func(x0) - k * x0
+    return k, b
+    
+    
+def method_newton(func: Callable[[float], float], a: float, b: float, x0: float = None,
+                  epsilon: float = 10e-6, max_iteration: int = 10000) -> float:
+    # Находим значения функции в точках границ отрезка
+    fa , fb = func(a), func(b)
+    
+    # Если значения крайних точек находятся в одной области, выдаем ошибку
+    if fa * fb > 0:
+        raise ValueError("Функция должна иметь разные знаки на концах интервала")
+    
+    # Если точка не задана, то расположим ее в центре отрезка
+    if x0 is None:
+        x0 = (a + b) / 2
+        
+    for i in range(max_iteration):
+        kl, bl = tangent(func=func, x0=x0)
+        x = - bl / kl
+        fx = func(x)
+        
+        if x < a or x > b:
+            raise 
+        
+        if (abs(fx) < epsilon):
+            return x0
+        
+        x0 = x
+        
+    # В случае, если пересечение не было найдено за отведенное количество итераций, то
+    # выдаем соответствующую ошибку 
+    raise InterruptedError(f"Нахождение корня превысило количество допустимых итераций ({max_iteration=})")
+        
+        
+print(method_newton(func=lambda x: x ** 2 - 2 * x - 3, a=1, b=5))
