@@ -1,5 +1,5 @@
 Semester_3/GPSS World Student Version/
 Semester_3/Exam/
 .git/
-.ruff_check/
+.ruff_cache/
 __pycache__/
